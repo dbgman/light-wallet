@@ -26,9 +26,9 @@ function callRpc(method, params, callback)
     };
 
     console.log('Sending RPC request to ' + url + ' with parameters: ' + JSON.stringify(params))
-    
+
     console.log('Sending RPC request to ' + url + ' with parameters: ' + JSON.stringify(params))
-    
+
     var resultNode = document.getElementById("rpc-result");
     /* Clear any previous errors */
     resultNode.innerHTML = "";
@@ -47,7 +47,7 @@ function callRpc(method, params, callback)
 
         error: function(jqXHR, textStatus, errorThrown)
         {
-            console.log('Failed to contact walletd: jqXHR = ' + jqXHR + 
+            console.log('Failed to contact walletd: jqXHR = ' + jqXHR +
                         ', textStatus = ' + textStatus + ', errorThrown = ' +
                         errorThrown)
 
@@ -118,24 +118,24 @@ function getBalance()
 
                 resultNode.innerHTML = "Locked: "
                                      + fromAtomic(json.lockedAmount)
-                                     + " TRTL"
+                                     + " LMO"
                                      + "</br>Unlocked: "
                                      + fromAtomic(json.availableBalance)
-                                     + " TRTL";
+                                     + " LMO";
             }
         }
     });
 }
 
 
- 
+
 function getAddresses()
 {
     var returnValue = callRpc("getAddresses", {}, function(returnValue)
     {
         if (returnValue.success)
         {
-			
+
             var resultNode = document.getElementById("rpc-result");
 
             if (returnValue.result.hasOwnProperty("error"))
@@ -173,7 +173,7 @@ function getTransactions()
                                      + returnValue.result.error.message;
             }
             else
-            { 
+            {
                 var json = returnValue.result.result.items;
 
                 // Makes sure only prints last 10 transactions
@@ -217,7 +217,7 @@ function getKeys()
                                      + returnValue.result.error.message;
             }
             else
-            { 
+            {
                 viewKey = returnValue.result.result.viewSecretKey;
 				resultNode.innerHTML = "IMPORTANT: DO NOT SHARE THESE KEYS WITH ANYONE!! <br>View Key: "
                                      + viewKey;
@@ -240,14 +240,14 @@ function getKeys()
                                      + returnValue.result.error.message;
             }
             else
-            { 
+            {
                 spendKey = returnValue.result.result.spendSecretKey;
 				resultNode.innerHTML += "<br>Spend Key: "
                                      + spendKey;
             }
         }
     });
-	
+
 }
 
 $(document).ready(function()
@@ -283,20 +283,20 @@ $(document).ready(function()
         if (amount < config.minAmount)
         {
             resultNode.innerHTML = "Amount is too small! Must be at least "
-                                 + config.minAmount + " TRTL.";
+                                 + config.minAmount + " LMO.";
             return;
         }
 
         if (fee < config.minFee)
         {
             resultNode.innerHTML = "Fee is too small! Must be at least "
-                                 + config.minFee + " TRTL.";
+                                 + config.minFee + " LMO.";
             return;
         }
-		
+
 		if (paymentId) {
 				console.log("has PaymentId");
-				
+
 				if (!(/^[0-9A-F]{64}$/i.test(paymentId))) {
 					resultNode.innerHTML = "PaymentId is not a hexdecimal 64 byte string!"
 					return;
