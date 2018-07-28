@@ -1,10 +1,10 @@
 var config =
 {
     "host" : "localhost",
-    "port" : 8070,
+    "port" : 35948,
     "rpcPassword" : "test",
-    "mixin" : 7,
-    "addressLength" : 98,
+    "mixin" : 5,
+    "addressLength" : 99,
     "minAmount" : 0.01,
     "minFee" : 0.1
 };
